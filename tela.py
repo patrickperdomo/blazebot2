@@ -9,7 +9,6 @@ from selenium.common.exceptions import TimeoutException
 import time
 import requests
 import json
-from arquivos_sensivel import *
 
 # PRIMEIRA JANELA
 
@@ -20,10 +19,10 @@ def janela_instrucoes():
     layout = [
 
         [sg.Text('FAÇA O LOGIN COM SUA CONTA DA BLAZE PARA CONTINUAR COM SUAS ESTRATEGIAS', size=(35, 5))],
-        
-        [sg.Text('email'),sg.Input(size=(15,0),key='email')],
 
-        [sg.Text('senha'),sg.Input(size=(15,0),key='senha')],
+        [sg.Text('email'), sg.Input(size=(15, 0), key='email')],
+
+        [sg.Text('senha'), sg.Input(size=(15, 0), key='senha')],
 
         [sg.Text('siga o passo a passo abaixo para conseguir usar o bot em sua total utilidade', size=(0, 2))],
 
@@ -47,9 +46,7 @@ def tela_aposta():
     layout = [
         [sg.Text('ATENÇÃO BOT JA CONFIGURADO PARA APOSTA AUTOMATICA')],
 
-        [sg.Text('coloque o valor da aposta aqui')],
-
-        [sg.Input(size=(5, 2), key='ValorAposta')],
+        [sg.Text('coloque o valor da aposta aqui'), sg.Input(size=(15,0),key='valor')],
 
         [sg.Text(
             'clique no botao iniciar para fazer a aposta')],
@@ -90,7 +87,9 @@ def Start():
 
 
 def Login():
-
+    email = values['email']
+    password = values['senha']
+    
     wait = WebDriverWait(driver, 10)
 
     LOGIN_BUTTON = wait.until(EC.visibility_of_element_located(
@@ -104,7 +103,7 @@ def Login():
 
     PASSWORD_INPUT = driver.find_elements(
         By.CLASS_NAME, 'input-wrapper')[1].find_element(By.TAG_NAME, 'input')
-    PASSWORD_INPUT.send_keys(senha)
+    PASSWORD_INPUT.send_keys(password)
 
     SUBMIT_BUTTON = driver.find_element(By.CLASS_NAME, 'submit')
     SUBMIT_BUTTON.click()
@@ -138,8 +137,9 @@ def pegar_dados():
 
 
 def Apostar():
+    valor = values['valor']
     VALOR_APOSTA = driver.find_element(
-        By.XPATH, '//*[@id="roulette-controller"]/div[1]/div[2]/div[1]/div/div[1]/input').send_keys()
+        By.XPATH, '//*[@id="roulette-controller"]/div[1]/div[2]/div[1]/div/div[1]/input').send_keys(valor)
 
 
 # VERIFICAR AS CORES
@@ -243,24 +243,26 @@ def QualNum(x):
 
 
 # FICA LENDO AS AÇOES DOS BOTOES
-def Dados():
 
-    while True:
 
-        window, event, values = sg.read_all_windows()
-        if event == sg.WIN_CLOSED or event == "parar bot":
-            break
+while True:
+    window, event, values = sg.read_all_windows()
+    if event == sg.WIN_CLOSED or event == "parar bot":
+        break
 
-        if window == janela1 and event == 'Continuar':
-            janela2 = tela_aposta()
-            janela1.hide()
+    if window == janela1 and event == 'Continuar':
+        janela2 = tela_aposta()
+        janela1.hide()
 
-        if window == janela2 and event == 'Voltar':
-            janela2.hide()
-            janela1.un_hide()
+    if window == janela2 and event == 'Voltar':
+        janela2.hide()
+        janela1.un_hide()
 
-        if window == janela2 and event == 'Apostar':
-            Start()
-            time.sleep(7)
-            # pegar_dados()
-            Apostar()
+    if window == janela2 and event == 'Apostar':
+        Start()
+        time.sleep(7)
+        # pegar_dados()
+        Apostar()
+
+       
+        
