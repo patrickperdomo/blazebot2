@@ -248,15 +248,8 @@ def Dados():
     while True:
 
         window, event, values = sg.read_all_windows()
-
-        email = values['email']
-
-        password = values ['senha']
-
-        valor = values['ValorAposta']
-
         if event == sg.WIN_CLOSED or event == "parar bot":
-        break
+            break
 
         if window == janela1 and event == 'Continuar':
             janela2 = tela_aposta()
