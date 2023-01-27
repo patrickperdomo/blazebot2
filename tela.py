@@ -46,7 +46,8 @@ def tela_aposta():
     layout = [
         [sg.Text('ATENÇÃO BOT JA CONFIGURADO PARA APOSTA AUTOMATICA')],
 
-        [sg.Text('coloque o valor da aposta aqui'), sg.Input(size=(15,0),key='valor')],
+        [sg.Text('coloque o valor da aposta aqui'),
+         sg.Input(size=(15, 0), key='valor')],
 
         [sg.Text(
             'clique no botao iniciar para fazer a aposta')],
@@ -88,8 +89,9 @@ def Start():
 
 def Login():
     email = values['email']
+
     password = values['senha']
-    
+
     wait = WebDriverWait(driver, 10)
 
     LOGIN_BUTTON = wait.until(EC.visibility_of_element_located(
@@ -251,18 +253,19 @@ while True:
         break
 
     if window == janela1 and event == 'Continuar':
+
+        Start()
+        time.sleep(3)
+
+        Login()
+
         janela2 = tela_aposta()
+
         janela1.hide()
 
     if window == janela2 and event == 'Voltar':
         janela2.hide()
         janela1.un_hide()
 
-    if window == janela2 and event == 'Apostar':
-        Start()
-        time.sleep(7)
-        # pegar_dados()
-        Apostar()
-
-       
-        
+    #if window == janela2 and event == 'Apostar':
+    
