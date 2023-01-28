@@ -147,8 +147,9 @@ def Apostar():
 # VERIFICAR AS CORES
 
 def Verificar(finalcor):
-    if finalcor == ['vermelho', 'vermelho', 'preto', 'preto', 'vermelho', 'vermelho', 'preto', 'preto']:
-        return Login()
+    while True:
+        if finalcor == ['vermelho', 'vermelho', 'preto', 'preto', 'vermelho', 'vermelho', 'preto', 'preto']:
+            return Login()
 
 # RETORNAR OS NUMEROS E CORES
 
@@ -268,6 +269,5 @@ while True:
         janela1.un_hide()
 
     if window == janela2 and event == 'Apostar':
-        
+
         Apostar()
-    
