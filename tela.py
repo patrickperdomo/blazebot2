@@ -267,5 +267,7 @@ while True:
         janela2.hide()
         janela1.un_hide()
 
-    #if window == janela2 and event == 'Apostar':
+    if window == janela2 and event == 'Apostar':
+        
+        Apostar()
     
